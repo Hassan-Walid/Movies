@@ -1,20 +1,40 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar } from "expo-status-bar";
+import { StyleSheet, Text, View } from "react-native";
+
+import { ButtonGroup, Avatar, Button } from "@rneui/themed";
+import Splash from "./components/SplashScreen/splash";
+import Moives from "./components/Movies/moives";
+import Movie from "./components/Movies/movie";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { useEffect, useState } from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import DrawerNavigation from "./navigation/DrawerNavigation";
 
 export default function App() {
+  const [splash, setSplash] = useState(true);
+  useEffect(() => {
+    setTimeout(() => {
+      setSplash(false);
+    }, 3000);
+  }, []);
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <>
+      <StatusBar style="light" />
+      {splash ? (
+        <Splash />
+      ) : (
+        <NavigationContainer>
+          <DrawerNavigation></DrawerNavigation>
+        </NavigationContainer>
+      )}
+    </>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "black",
+    paddingTop: 10,
   },
 });

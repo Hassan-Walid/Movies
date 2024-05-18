@@ -1,21 +1,58 @@
-import React, { useState } from "react";
-import { StyleSheet, View, Text, Image } from "react-native";
-import Icon from "react-native-vector-icons/MaterialIcons";
+import React, { useEffect, useState } from "react";
+import { StyleSheet, View, Text, Image, Pressable } from "react-native";
 
-// const [favIcon, setFavIcon] = useState(true);
-const Movie = () => {
+import Icon from "react-native-vector-icons/MaterialIcons";
+import { useDispatch, useSelector } from "react-redux";
+import { addFav, removeFav } from "../../redux/slices/favoriteSlice";
+import { useNavigation } from "@react-navigation/native";
+
+const Movie = ({ data }) => {
+  const [favIcon, setFavIcon] = useState(true);
+  const navigation = useNavigation();
+  const favArr = useSelector((state) => state.favList.favList);
+  useEffect(() => {
+    favArr.find((m) => {
+      if (m.id === data.id) {
+        setFavIcon(false);
+      }
+    });
+  }, [data.id]);
+  const dispatch = useDispatch();
   return (
     <View style={styles.container}>
-      <Image
-        source={require("../../assets/images/splash.jpg")}
-        style={styles.image}
-      />
+      <Pressable
+        onPress={() => {
+          navigation.navigate("details");
+        }}
+      >
+        <Image
+          source={{
+            uri: "https://image.tmdb.org/t/p/w500/" + data.poster_path,
+          }}
+          style={styles.image}
+        />
+      </Pressable>
+
       <View style={styles.section}>
-        <Text style={styles.text}>Movie</Text>
-        {false ? (
-          <Icon name="favorite-outline" style={styles.icon}></Icon>
+        <Text style={styles.text}>{data.title}</Text>
+        {favIcon ? (
+          <Icon
+            name="favorite-outline"
+            style={styles.icon}
+            onPress={() => {
+              setFavIcon(false);
+              dispatch(addFav(data));
+            }}
+          ></Icon>
         ) : (
-          <Icon name="favorite" style={[styles.text, styles.icon]}></Icon>
+          <Icon
+            name="favorite"
+            style={[styles.text, styles.icon]}
+            onPress={() => {
+              setFavIcon(true);
+              dispatch(removeFav(data.id));
+            }}
+          ></Icon>
         )}
       </View>
     </View>
@@ -43,11 +80,12 @@ const styles = StyleSheet.create({
   text: {
     paddingTop: 5,
     color: "wheat",
-    fontSize: 20,
+    fontSize: 15,
   },
   icon: {
     fontSize: 28,
     paddingTop: 5,
+    color: "red",
   },
 });
 

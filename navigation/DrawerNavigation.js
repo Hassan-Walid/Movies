@@ -28,7 +28,11 @@ const DrawerNavigation = () => {
         headerTintColor: "wheat",
       }}
     >
-      <drawer.Screen name={"Home"} component={Moives} />
+      <drawer.Screen
+        name={"Home"}
+        component={Moives}
+        options={{ unmountOnBlur: true }}
+      />
       <drawer.Screen name={"About"} component={About} />
       <drawer.Screen name={"My Favorites"} component={Favorites} />
     </drawer.Navigator>

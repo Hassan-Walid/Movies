@@ -47,7 +47,7 @@ const Section = (props) => {
               color: "red",
             }}
           >
-            Sea More
+            See More
           </Text>
         </Pressable>
       </View>

@@ -1,4 +1,5 @@
 import { useNavigation } from "@react-navigation/native";
+import { makeStyles } from "@rneui/themed";
 import React from "react";
 import { StyleSheet, View, Text, Image, Pressable } from "react-native";
 import Slideshow from "react-native-image-slider-show";
@@ -60,13 +61,15 @@ const Section = (props) => {
         >
           {topRatedArr.map((m) => {
             return (
-              <Image
-                key={m.id}
-                source={{
-                  uri: "https://image.tmdb.org/t/p/w500/" + m.poster_path,
-                }}
-                style={styles.img}
-              ></Image>
+              <Pressable onPress={() => navigation.navigate("details", m.id)}>
+                <Image
+                  key={m.id}
+                  source={{
+                    uri: "https://image.tmdb.org/t/p/w500/" + m.poster_path,
+                  }}
+                  style={styles.img}
+                ></Image>
+              </Pressable>
             );
           })}
         </View>

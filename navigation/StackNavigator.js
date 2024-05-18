@@ -25,7 +25,11 @@ const StackNavigator = () => {
         component={TabNavigation}
         options={{ header: () => null }}
       />
-      <Stack.Screen name="details" component={MovieDetails} />
+      <Stack.Screen
+        name="details"
+        component={MovieDetails}
+        options={{ header: () => null }}
+      />
       <Stack.Screen
         name="seaMore"
         component={SeaMore}

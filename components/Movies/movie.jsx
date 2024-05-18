@@ -22,7 +22,7 @@ const Movie = ({ data }) => {
     <View style={styles.container}>
       <Pressable
         onPress={() => {
-          navigation.navigate("details");
+          navigation.navigate("details", data.id);
         }}
       >
         <Image

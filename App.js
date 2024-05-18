@@ -10,6 +10,9 @@ import { Provider } from "react-redux";
 import store from "./redux/store";
 import StackNavigator from "./navigation/StackNavigator";
 import Home from "./components/home/home";
+import VideoScreen from "./components/test";
+
+console.disableYellowBox = true;
 
 export default function App() {
   const [splash, setSplash] = useState(true);
@@ -21,7 +24,7 @@ export default function App() {
   return (
     <>
       {/* <Provider store={store}>
-        <Home></Home>
+        <VideoScreen></VideoScreen>
       </Provider> */}
 
       <StatusBar style="light" />
